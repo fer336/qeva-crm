@@ -15,7 +15,12 @@ x-app-env: &app-env
   DEFAULT_LOCALE: es
   FORCE_SSL: "true"
   ENABLE_ACCOUNT_SIGNUP: "false"
-  ACTIVE_STORAGE_SERVICE: local
+  # local = volume (single replica only). amazon = S3-compatible storage (MinIO) for scaling.
+  ACTIVE_STORAGE_SERVICE: ${ACTIVE_STORAGE_SERVICE:-local}
+  AWS_ENDPOINT: ${AWS_ENDPOINT:-}
+  AWS_REGION: ${AWS_REGION:-us-east-1}
+  S3_BUCKET_NAME: ${S3_BUCKET_NAME:-crm-qeva}
+  AWS_S3_FORCE_PATH_STYLE: ${AWS_S3_FORCE_PATH_STYLE:-false}
   RAILS_LOG_TO_STDOUT: "true"
   USE_INBOX_AVATAR_FOR_BOT: "true"
 
@@ -104,7 +109,9 @@ services:
 
 secrets:
   qeva_env:
+    # Swarm secrets are immutable: to change them, create a new secret and set QEVA_ENV_SECRET to its name.
     external: true
+    name: ${QEVA_ENV_SECRET:-qeva_env}
 
 volumes:
   qeva_storage:
