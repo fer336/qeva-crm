@@ -144,6 +144,8 @@ const setExpandedItem = name => {
 const {
   sidebarWidth,
   isCollapsed,
+  isHidden,
+  toggleHidden,
   setSidebarWidth,
   saveWidth,
   snapToCollapsed,
@@ -373,7 +375,7 @@ const menuItems = computed(() => {
     {
       name: 'Inbox',
       label: t('SIDEBAR.INBOX'),
-      icon: 'i-lucide-inbox',
+      icon: 'i-ph-tray',
       to: accountScopedRoute('inbox_view'),
       activeOn: ['inbox_view', 'inbox_view_conversation'],
       getterKeys: {
@@ -383,7 +385,7 @@ const menuItems = computed(() => {
     {
       name: 'Conversation',
       label: t('SIDEBAR.CONVERSATIONS'),
-      icon: 'i-lucide-message-circle',
+      icon: 'i-ph-chat-circle-dots',
       children: [
         {
           name: 'All',
@@ -604,7 +606,7 @@ const menuItems = computed(() => {
     {
       name: 'Contacts',
       label: t('SIDEBAR.CONTACTS'),
-      icon: 'i-lucide-contact',
+      icon: 'i-ph-address-book',
       children: [
         {
           name: 'All Contacts',
@@ -671,7 +673,7 @@ const menuItems = computed(() => {
     {
       name: 'Companies',
       label: t('SIDEBAR.COMPANIES'),
-      icon: 'i-lucide-building-2',
+      icon: 'i-ph-buildings',
       children: [
         {
           name: 'All Companies',
@@ -688,7 +690,7 @@ const menuItems = computed(() => {
     {
       name: 'Reports',
       label: t('SIDEBAR.REPORTS'),
-      icon: 'i-lucide-chart-spline',
+      icon: 'i-ph-chart-bar',
       children: [
         {
           name: 'Report Overview',
@@ -731,7 +733,7 @@ const menuItems = computed(() => {
     {
       name: 'Campaigns',
       label: t('SIDEBAR.CAMPAIGNS'),
-      icon: 'i-lucide-megaphone',
+      icon: 'i-ph-megaphone-simple',
       children: [
         {
           name: 'Live chat',
@@ -753,7 +755,7 @@ const menuItems = computed(() => {
     {
       name: 'Portals',
       label: t('SIDEBAR.HELP_CENTER.TITLE'),
-      icon: 'i-lucide-library-big',
+      icon: 'i-ph-globe-hemisphere-west',
       children: [
         {
           name: 'Articles',
@@ -800,7 +802,7 @@ const menuItems = computed(() => {
     {
       name: 'Settings',
       label: t('SIDEBAR.SETTINGS'),
-      icon: 'i-lucide-bolt',
+      icon: 'i-ph-gear-six',
       children: [
         {
           name: 'Settings Account Settings',
@@ -970,6 +972,16 @@ const menuItems = computed(() => {
 </script>
 
 <template>
+  <button
+    v-if="isHidden"
+    type="button"
+    class="hidden md:flex fixed top-3 left-3 z-40 size-9 items-center justify-center rounded-lg border border-[#DDE4ED] dark:border-[#1F2940] bg-white dark:bg-[#0C1220] text-[#3B475C] dark:text-[#B5C1D6] hover:bg-[#E3EDFC] dark:hover:bg-[#10264A]"
+    :aria-label="t('SIDEBAR.SHOW')"
+    :title="t('SIDEBAR.SHOW')"
+    @click="toggleHidden"
+  >
+    <span class="i-ph-sidebar-simple size-5" />
+  </button>
   <aside
     v-on-click-outside="[
       closeMobileSidebar,
@@ -986,6 +998,7 @@ const menuItems = computed(() => {
       {
         'shadow-lg md:shadow-none': isMobileSidebarOpen,
         'ltr:-translate-x-full rtl:translate-x-full': !isMobileSidebarOpen,
+        'md:hidden': isHidden,
         'transition-transform duration-200 ease-out md:transition-[width]':
           !isResizing,
       },
@@ -1020,6 +1033,15 @@ const menuItems = computed(() => {
           />
         </template>
       </div>
+      <button
+        type="button"
+        class="hidden md:flex mx-auto size-8 items-center justify-center rounded-lg text-[#5B6880] dark:text-[#8493AC] hover:bg-[#E3EDFC] dark:hover:bg-[#10264A]"
+        :aria-label="t('SIDEBAR.HIDE')"
+        :title="t('SIDEBAR.HIDE')"
+        @click="toggleHidden"
+      >
+        <span class="i-ph-sidebar-simple size-5" />
+      </button>
       <div
         class="flex gap-2"
         :class="isEffectivelyCollapsed ? 'flex-col items-center' : 'px-2'"

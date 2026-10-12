@@ -19,6 +19,12 @@ export function useSidebarResize() {
 
   const sidebarWidth = ref(uiSettings.value.sidebar_width || DEFAULT_WIDTH);
   const isCollapsed = computed(() => sidebarWidth.value < COLLAPSED_THRESHOLD);
+  const isHidden = ref(Boolean(uiSettings.value.sidebar_hidden));
+
+  const toggleHidden = () => {
+    isHidden.value = !isHidden.value;
+    updateUISettings({ sidebar_hidden: isHidden.value });
+  };
 
   const setSidebarWidth = width => {
     sidebarWidth.value = Math.max(MIN_WIDTH, Math.min(MAX_WIDTH, width));
@@ -41,6 +47,8 @@ export function useSidebarResize() {
   return {
     sidebarWidth,
     isCollapsed,
+    isHidden,
+    toggleHidden,
     setSidebarWidth,
     saveWidth,
     snapToCollapsed,
