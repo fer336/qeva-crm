@@ -308,6 +308,8 @@
     }
   },
   "SIDEBAR": {
+    "HIDE": "Ocultar menú",
+    "SHOW": "Mostrar menú",
     "NO_ITEMS": "No hay elementos",
     "CURRENTLY_VIEWING_ACCOUNT": "Visualizando:",
     "SWITCH": "Cambiar",
