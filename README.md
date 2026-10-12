@@ -109,7 +109,7 @@ Por defecto los adjuntos se guardan en un volumen local. Eso funciona con una so
    | `AWS_SECRET_ACCESS_KEY` | Secret key de ese usuario |
    | `AWS_REGION` | La región que tenga MinIO (por defecto `us-east-1`) |
    | `S3_BUCKET_NAME` | Nombre del bucket |
-   | `AWS_ENDPOINT` | Endpoint de MinIO. En la red de Docker: `http://minio:9000` (opción 1) o `http://minio_minio:9000` (servidor compartido). Desde internet: `https://s3.qeva.xyz`. |
+   | `AWS_ENDPOINT` | Endpoint de MinIO **accesible desde el navegador**, por ejemplo `https://s3.qeva.xyz`. Chatwoot firma los enlaces de descarga con este endpoint, así que uno interno (`http://minio_minio:9000`) hace que los adjuntos no se puedan abrir. |
    | `AWS_S3_FORCE_PATH_STYLE` | `true` para MinIO |
 
 3. **Probar** subiendo un adjunto desde la app. Si falla, el error más común es un bucket inexistente o credenciales mal copiadas.

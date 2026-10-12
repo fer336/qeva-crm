@@ -25,7 +25,8 @@ x-app-env: &app-env
   REDIS_URL: redis://:${REDIS_PASSWORD:?set REDIS_PASSWORD in .env}@redis:6379
   REDIS_PASSWORD: ${REDIS_PASSWORD}
   ACTIVE_STORAGE_SERVICE: amazon
-  AWS_ENDPOINT: http://minio:9000
+  # Must be reachable from the browser (download links are signed with this host). Use your public MinIO URL.
+  AWS_ENDPOINT: ${AWS_ENDPOINT:-http://minio:9000}
   AWS_S3_FORCE_PATH_STYLE: "true"
   AWS_REGION: ${AWS_REGION:-us-east-1}
   AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:?set AWS_ACCESS_KEY_ID in .env}
