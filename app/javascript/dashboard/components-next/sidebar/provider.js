@@ -5,7 +5,7 @@ import { useUISettings } from 'dashboard/composables/useUISettings';
 
 const SidebarControl = Symbol('SidebarControl');
 
-const DEFAULT_WIDTH = 200;
+const DEFAULT_WIDTH = 72; // icon rail, as in the QEVA design; users keep a width they saved
 const MIN_WIDTH = 56;
 const COLLAPSED_THRESHOLD = 160;
 const MAX_WIDTH = 320;
