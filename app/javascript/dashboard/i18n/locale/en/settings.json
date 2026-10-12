@@ -313,8 +313,8 @@
     }
   },
   "SIDEBAR": {
-    "HIDE": "Hide sidebar",
-    "SHOW": "Show sidebar",
+    "HIDE": "Collapse sidebar",
+    "SHOW": "Expand sidebar",
     "NO_ITEMS": "No items",
     "CURRENTLY_VIEWING_ACCOUNT": "Currently viewing:",
     "SWITCH": "Switch",

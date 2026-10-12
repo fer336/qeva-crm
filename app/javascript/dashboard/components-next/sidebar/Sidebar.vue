@@ -144,14 +144,18 @@ const setExpandedItem = name => {
 const {
   sidebarWidth,
   isCollapsed,
-  isHidden,
-  toggleHidden,
   setSidebarWidth,
   saveWidth,
   snapToCollapsed,
   snapToExpanded,
   COLLAPSED_THRESHOLD,
 } = useSidebarResize();
+
+// Toggles between the icon rail and the expanded sidebar; the rail stays visible so there is always a way back.
+const toggleSidebarMode = () => {
+  if (isCollapsed.value) snapToExpanded();
+  else snapToCollapsed();
+};
 
 // On mobile, sidebar is always expanded (flyout mode)
 const isEffectivelyCollapsed = computed(
@@ -972,16 +976,6 @@ const menuItems = computed(() => {
 </script>
 
 <template>
-  <button
-    v-if="isHidden"
-    type="button"
-    class="hidden md:flex fixed top-3 left-3 z-40 size-9 items-center justify-center rounded-lg border border-[#DDE4ED] dark:border-[#1F2940] bg-white dark:bg-[#0C1220] text-[#3B475C] dark:text-[#B5C1D6] hover:bg-[#E3EDFC] dark:hover:bg-[#10264A]"
-    :aria-label="t('SIDEBAR.SHOW')"
-    :title="t('SIDEBAR.SHOW')"
-    @click="toggleHidden"
-  >
-    <span class="i-ph-sidebar-simple size-5" />
-  </button>
   <aside
     v-on-click-outside="[
       closeMobileSidebar,
@@ -998,7 +992,6 @@ const menuItems = computed(() => {
       {
         'shadow-lg md:shadow-none': isMobileSidebarOpen,
         'ltr:-translate-x-full rtl:translate-x-full': !isMobileSidebarOpen,
-        'md:hidden': isHidden,
         'transition-transform duration-200 ease-out md:transition-[width]':
           !isResizing,
       },
@@ -1036,9 +1029,9 @@ const menuItems = computed(() => {
       <button
         type="button"
         class="hidden md:flex mx-auto size-8 items-center justify-center rounded-lg text-[#5B6880] dark:text-[#8493AC] hover:bg-[#E3EDFC] dark:hover:bg-[#10264A]"
-        :aria-label="t('SIDEBAR.HIDE')"
-        :title="t('SIDEBAR.HIDE')"
-        @click="toggleHidden"
+        :aria-label="isCollapsed ? t('SIDEBAR.SHOW') : t('SIDEBAR.HIDE')"
+        :title="isCollapsed ? t('SIDEBAR.SHOW') : t('SIDEBAR.HIDE')"
+        @click="toggleSidebarMode"
       >
         <span class="i-ph-sidebar-simple size-5" />
       </button>
