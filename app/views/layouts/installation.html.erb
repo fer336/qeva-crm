@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>" class="h-full">
+  <head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= t("installation.onboarding.heading") %> | QEVA CRM</title>
+    <%= render "super_admin/application/theme" %>
+    <%= render "super_admin/application/font_preload", file: "Inter/InterVariable.woff2" %>
+    <%= vite_client_tag %>
+    <%= vite_stylesheet_tag 'superadmin.scss' %>
+  </head>
+  <body class="min-h-full bg-[#EDF1F7] dark:bg-[#0A101C] text-[#101828] dark:text-[#E8EEF8] antialiased">
+    <main class="relative mx-auto flex min-h-screen w-full max-w-md flex-col justify-center px-4 py-10">
+      <div class="mx-auto font-mono text-xl font-bold tracking-wide text-[#2A72E8] dark:text-[#2A72E8]">
+        QEVA <span class="text-[#101828] dark:text-[#E8EEF8]">CRM</span>
+      </div>
+      <h1 class="mt-6 text-center text-3xl font-semibold tracking-tight"><%= yield :heading %></h1>
+      <div class="mt-8 rounded-3xl border border-[#DCE3EE] dark:border-[#1B2640] bg-white dark:bg-[#0E1627] p-8 shadow-sm">
+        <% if flash[:error].present? %>
+          <%= render "super_admin/application/alert", extra: "mb-4" do %>
+            <%= flash[:error] %>
+          <% end %>
+        <% end %>
+        <%= yield %>
+      </div>
+    </main>
+  </body>
+</html>

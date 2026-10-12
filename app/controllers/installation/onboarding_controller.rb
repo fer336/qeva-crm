@@ -1,4 +1,5 @@
 class Installation::OnboardingController < ApplicationController
+  layout 'installation'
   before_action :ensure_installation_onboarding
 
   def index; end

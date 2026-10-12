@@ -1,30 +1,30 @@
-<%= render "super_admin/application/standalone", heading: t("installation.onboarding.heading") do %>
-  <%= form_tag('/installation/onboarding', class: 'space-y-4') do %>
-    <div>
-      <label for="user_name" class="text-label"><%= t("installation.onboarding.name") %></label>
-      <%= text_field :user, :name, placeholder: t("installation.onboarding.name_placeholder"), required: true, class: ui(:input, "mt-1 min-h-10") %>
-    </div>
+<% content_for :heading, t("installation.onboarding.heading") %>
 
-    <div>
-      <label for="user_company" class="text-label"><%= t("installation.onboarding.company") %></label>
-      <%= text_field :user, :company, placeholder: t("installation.onboarding.company_placeholder"), required: true, class: ui(:input, "mt-1 min-h-10") %>
-    </div>
+<%= form_tag('/installation/onboarding', class: 'space-y-5') do %>
+  <div class="space-y-2">
+    <label for="user_name" class="block text-sm font-semibold text-[#3B475C] dark:text-[#B5C1D6]"><%= t("installation.onboarding.name") %></label>
+    <%= text_field :user, :name, placeholder: t("installation.onboarding.name_placeholder"), required: true, class: "block h-12 w-full rounded-xl border border-[#DCE3EE] dark:border-[#1B2640] bg-[#F3F6FA] dark:bg-[#151F34] px-4 text-[#101828] dark:text-[#E8EEF8] placeholder:text-[#8493AC] outline-none focus:border-[#2A72E8]" %>
+  </div>
 
-    <div>
-      <label for="user_email" class="text-label"><%= t("installation.onboarding.email") %></label>
-      <%= email_field :user, :email, placeholder: t("installation.onboarding.email_placeholder"), required: true, class: ui(:input, "mt-1 min-h-10") %>
-    </div>
+  <div class="space-y-2">
+    <label for="user_company" class="block text-sm font-semibold text-[#3B475C] dark:text-[#B5C1D6]"><%= t("installation.onboarding.company") %></label>
+    <%= text_field :user, :company, placeholder: t("installation.onboarding.company_placeholder"), required: true, class: "block h-12 w-full rounded-xl border border-[#DCE3EE] dark:border-[#1B2640] bg-[#F3F6FA] dark:bg-[#151F34] px-4 text-[#101828] dark:text-[#E8EEF8] placeholder:text-[#8493AC] outline-none focus:border-[#2A72E8]" %>
+  </div>
 
-    <div>
-      <label for="user_password" class="text-label"><%= t("installation.onboarding.password") %></label>
-      <%= password_field :user, :password, placeholder: t("installation.onboarding.password_placeholder"), required: true, class: ui(:input, "mt-1 min-h-10") %>
-    </div>
+  <div class="space-y-2">
+    <label for="user_email" class="block text-sm font-semibold text-[#3B475C] dark:text-[#B5C1D6]"><%= t("installation.onboarding.email") %></label>
+    <%= email_field :user, :email, placeholder: t("installation.onboarding.email_placeholder"), required: true, class: "block h-12 w-full rounded-xl border border-[#DCE3EE] dark:border-[#1B2640] bg-[#F3F6FA] dark:bg-[#151F34] px-4 text-[#101828] dark:text-[#E8EEF8] placeholder:text-[#8493AC] outline-none focus:border-[#2A72E8]" %>
+  </div>
 
-    <label class="flex items-start gap-2 text-body-main" for="subscribe_to_updates">
-      <%= check_box_tag "subscribe_to_updates", 'true', true, class: ui(:checkbox, "mt-0.5") %>
-      <%= t("installation.onboarding.subscribe") %>
-    </label>
+  <div class="space-y-2">
+    <label for="user_password" class="block text-sm font-semibold text-[#3B475C] dark:text-[#B5C1D6]"><%= t("installation.onboarding.password") %></label>
+    <%= password_field :user, :password, placeholder: t("installation.onboarding.password_placeholder"), required: true, class: "block h-12 w-full rounded-xl border border-[#DCE3EE] dark:border-[#1B2640] bg-[#F3F6FA] dark:bg-[#151F34] px-4 text-[#101828] dark:text-[#E8EEF8] placeholder:text-[#8493AC] outline-none focus:border-[#2A72E8]" %>
+  </div>
 
-    <%= render "super_admin/application/button", label: t("installation.onboarding.submit"), type: "submit", extra: "h-10 w-full" %>
-  <% end %>
+  <label class="flex items-start gap-2 text-sm text-[#3B475C] dark:text-[#B5C1D6]" for="subscribe_to_updates">
+    <%= check_box_tag "subscribe_to_updates", 'true', true, class: "mt-0.5 size-4 accent-[#2A72E8]" %>
+    <%= t("installation.onboarding.subscribe") %>
+  </label>
+
+  <%= render "super_admin/application/button", label: t("installation.onboarding.submit"), type: "submit", extra: "h-12 w-full rounded-xl !bg-[#2A72E8] hover:!bg-[#1F63D6] !text-white text-base font-semibold" %>
 <% end %>
