@@ -1,6 +1,8 @@
 {
   "LOGIN": {
     "TITLE": "Login to Chatwoot",
+    "WELCOME_TITLE": "Welcome back",
+    "WELCOME_SUBTITLE": "Sign in to see your team's conversations.",
     "EMAIL": {
       "LABEL": "Email",
       "PLACEHOLDER": "example{'@'}companyname.com",

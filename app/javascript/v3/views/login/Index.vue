@@ -76,6 +76,7 @@ export default {
         hasErrored: false,
       },
       error: '',
+      brandWordmark: 'QEVA CRM',
       mfaRequired: false,
       mfaToken: null,
       mfaSetupRequired: false,
@@ -401,22 +402,19 @@ export default {
     class="flex flex-col justify-center w-full min-h-screen py-16 bg-[#EDF1F7] dark:bg-[#0A101C] sm:px-6 lg:px-8"
   >
     <section class="max-w-5xl mx-auto">
-      <img
-        :src="globalConfig.logo"
-        :alt="globalConfig.installationName"
-        class="block w-auto h-8 mx-auto dark:hidden"
-      />
-      <img
-        v-if="globalConfig.logoDark"
-        :src="globalConfig.logoDark"
-        :alt="globalConfig.installationName"
-        class="hidden w-auto h-8 mx-auto dark:block"
-      />
+      <div
+        class="text-center font-mono text-2xl font-bold tracking-wide text-[#2A72E8]"
+      >
+        {{ brandWordmark }}
+      </div>
       <h2
         class="mt-6 text-3xl font-semibold tracking-tight text-center text-[#101828] dark:text-[#E8EEF8]"
       >
-        {{ replaceInstallationName($t('LOGIN.TITLE')) }}
+        {{ $t('LOGIN.WELCOME_TITLE') }}
       </h2>
+      <p class="mt-2 text-sm text-center text-[#5B6880] dark:text-[#8493AC]">
+        {{ $t('LOGIN.WELCOME_SUBTITLE') }}
+      </p>
       <p v-if="showSignupLink" class="mt-3 text-sm text-center text-n-slate-11">
         {{ $t('COMMON.OR') }}
         <router-link

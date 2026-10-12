@@ -1,6 +1,8 @@
 {
   "LOGIN": {
     "TITLE": "Iniciar sesión en Chatwoot",
+    "WELCOME_TITLE": "Bienvenido de nuevo",
+    "WELCOME_SUBTITLE": "Ingresá para ver las conversaciones de tu equipo.",
     "EMAIL": {
       "LABEL": "E-mail",
       "PLACEHOLDER": "ejemplo{'@'}nombredeempresa.com",
