@@ -15,7 +15,10 @@ x-app-env: &app-env
   DEFAULT_LOCALE: es
   FORCE_SSL: "true"
   ENABLE_ACCOUNT_SIGNUP: "false"
-  ACTIVE_STORAGE_SERVICE: local
+  # local = volume (single replica only). amazon = S3-compatible storage (MinIO) for scaling.
+  ACTIVE_STORAGE_SERVICE: ${ACTIVE_STORAGE_SERVICE:-local}
+  AWS_ENDPOINT: ${AWS_ENDPOINT:-}
+  AWS_S3_FORCE_PATH_STYLE: ${AWS_S3_FORCE_PATH_STYLE:-false}
   RAILS_LOG_TO_STDOUT: "true"
   USE_INBOX_AVATAR_FOR_BOT: "true"
 

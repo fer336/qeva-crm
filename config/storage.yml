@@ -13,6 +13,10 @@ amazon:
   secret_access_key: <%= ENV.fetch('AWS_SECRET_ACCESS_KEY', '') %>
   region: <%= ENV.fetch('AWS_REGION', '') %>
   bucket: <%= ENV.fetch('S3_BUCKET_NAME', '') %>
+  # Set AWS_ENDPOINT for S3-compatible servers such as MinIO (for example http://minio_minio:9000).
+  endpoint: <%= ENV['AWS_ENDPOINT'].presence %>
+  # MinIO needs path-style URLs (bucket in the path, not the hostname).
+  force_path_style: <%= ENV.fetch('AWS_S3_FORCE_PATH_STYLE', 'false') == 'true' %>
 
 # Remember not to checkin your GCS keyfile to a repository
 google:
