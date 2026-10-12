@@ -25,7 +25,8 @@ services:
     command:
       - sh
       - -c
-      - set -a; . /run/secrets/qeva_env; set +a; exec docker/entrypoints/rails.sh bundle exec rails s -p 3000 -b 0.0.0.0
+      # Migrate first (idempotent, same command Chatwoot documents for upgrades), then serve.
+      - set -a; . /run/secrets/qeva_env; set +a; docker/entrypoints/rails.sh bundle exec rails db:chatwoot_prepare && exec docker/entrypoints/rails.sh bundle exec rails s -p 3000 -b 0.0.0.0
     secrets:
       - qeva_env
     volumes:
