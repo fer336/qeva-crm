@@ -101,10 +101,11 @@ chmod 600 "${SECRET_FILE}"
 log "Verifying the app user"
 "${MC}" alias set qeva-app "${MINIO_URL}" "${APP_KEY}" "${APP_SECRET}" >/dev/null
 "${MC}" ls "qeva-app/${BUCKET}" >/dev/null && echo "bucket ${BUCKET}: OK"
-if "${MC}" ls qeva-app >/dev/null 2>&1; then
-  echo "WARNING: the app user can list all buckets; check the policy."
+VISIBLE="$("${MC}" ls qeva-app 2>/dev/null | wc -l | tr -d ' ')"
+if [ "${VISIBLE}" -eq 1 ]; then
+  echo "buckets visible to the app user: only ${BUCKET} (OK)"
 else
-  echo "listing other buckets: denied (OK)"
+  echo "WARNING: the app user sees ${VISIBLE} buckets; review policy ${POLICY}."
 fi
 
 log "Done"
@@ -115,6 +116,7 @@ Next steps (the secret itself is NOT printed):
        AWS_SECRET_ACCESS_KEY=<contents of ${SECRET_FILE}>
   2. In Portainer, stack variables:
        QEVA_ENV_SECRET=qeva_env_v2
+       S3_BUCKET_NAME=${BUCKET}
        ACTIVE_STORAGE_SERVICE=amazon
        AWS_ENDPOINT=${MINIO_URL}
        AWS_S3_FORCE_PATH_STYLE=true
